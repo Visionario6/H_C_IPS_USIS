@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+{% if request.user.is_authenticated %}
+<h3>INICIO</h3>
+<hr>
+
+<h2> Bienvenido a IPS USIS</h2>
+<br>
+<br>
+<div class="card">
+<div class="card-body">
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Nombre Completo</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{ user.first_name | upper }} {{ user.last_name | upper }}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Correo Electronico</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{ user.email }}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">Cedula</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{ user.cedula }}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="mb-0">ROL</p>
+      </div>
+      <div class="col-sm-9">
+        <p class="text-muted mb-0">{{ user.rol }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<a type="button"  href="{%  url 'Editar_Usuarios' user.id %}" class="btn btn-outline-success">Editar</a>
+
+{% else %}
+
+<div class="d-flex">
+        <div class="w-100">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                </div>
+                </div>
+              </nav>
+              <div id="content">
+                <section>
+                    <div class="container">
+                        <div class="row">
+                                <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                  <div class="text-end">
+                                    <img src="{% static 'img/logo.png' %}" width="100px"  alt="">
+                                  </div>
+                                    <h1 class="font-weight-bold mb-0"> TU HISTORIAL CLINICO A SOLO UN CLICK</h1>
+                                    <p class="lead text-muted">El sistema de información clínico ahora está en tus manos a un solo clic.</p>
+                                    <a class="btn btn-outline-success" href="{%  url 'Register' %}">REGISTRATE AQUÍ</a>
+                                </div>
+
+                                <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                                  <div class="text-end">
+                                    <img src="{% static 'img/21.png' %}" width="580" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+              </div>
+        </div>
+
+{% endif %}
+
+{% endblock content %}
