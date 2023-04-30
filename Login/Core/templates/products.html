@@ -5,15 +5,20 @@
 
 <h3>HISTORIA CLINICA</h3>
 
-<div class="container m-5 p-5 ">
-
+<div class="card">
+<div class="card-body">
+    <div class="row">
     <form action="" method="post">
         {% csrf_token %}
                 {{ form | crispy }}
         <br>
         <button class="btn btn-outline-success float-end"type="submit">Actualizar</button>
-        <a href="{% url 'verHc' %}" class="card-link">Ver Historia Clinica</a>
+        <a href="{% url 'verHc' %}" class="card-link">Ver Historia Clínica</a>
     </form>
+    </div>
+  </div>
+</div>
+
 
 </div>
 

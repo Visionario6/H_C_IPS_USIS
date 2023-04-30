@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
+
 {% block content %}
 {% load static %}
 
 {% if request.user.is_authenticated %}
-<h3>INICIO</h3>
-<hr>
-
 <h2> Bienvenido a IPS USIS</h2>
 <br>
 <br>
@@ -31,7 +29,7 @@
     <hr>
     <div class="row">
       <div class="col-sm-3">
-        <p class="mb-0">Cedula</p>
+        <p class="mb-0">Cédula</p>
       </div>
       <div class="col-sm-9">
         <p class="text-muted mb-0">{{ user.cedula }}</p>
@@ -43,7 +41,11 @@
         <p class="mb-0">ROL</p>
       </div>
       <div class="col-sm-9">
-        <p class="text-muted mb-0">{{ user.rol }}</p>
+        {% if request.user.is_especialista %}
+        <p class="text-muted mb-0">ESPECIALISTA</p>
+        {% else %}
+        <p class="text-muted mb-0">PACIENTE</p>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -52,6 +54,8 @@
 <br>
 
 <a type="button"  href="{%  url 'Editar_Usuarios' user.id %}" class="btn btn-outline-success">Editar</a>
+
+
 
 {% else %}
 
@@ -88,7 +92,6 @@
                 </section>
               </div>
         </div>
-
 {% endif %}
 
 {% endblock content %}

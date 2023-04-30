@@ -1,55 +1,35 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 
-<h3> Ver Historia Clinica</h3>
-    <div class="card-body">
-    <div class="row">
-      <div class="col-sm-3">
-        <p class="mb-0">Antecedentes</p>
-      </div>
-      <div class="col-sm-9">
-        <p class="text-muted mb-0">{{ Antecedentes}}</p>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-sm-3">
-        <p class="mb-0">Epicrisis</p>
-      </div>
-      <div class="col-sm-9">
-        <p class="text-muted mb-0">{{ Epicrisis }}</p>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-sm-3">
-        <p class="mb-0">Diagnostico</p>
-      </div>
-      <div class="col-sm-9">
-        <p class="text-muted mb-0">{{ Diagnostico }}</p>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-sm-3">
-        <p class="mb-0">Tratamiento</p>
-      </div>
-      <div class="col-sm-9">
-        <p class="text-muted mb-0">{{ Tratamiento }}</p>
-      </div>
-    </div>
-        <hr>
-        <div class="row">
-      <div class="col-sm-3">
-            <p class="mb-0">Recomendaciones</p>
-      </div>
-      <div class="col-sm-9">
-        <p class="text-muted mb-0">{{ Recomendaciones }}</p>
-      </div>
-    </div>
-  </div>
+<table id="datatable_pacientes" class="table mt-5" >
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Paciente</th>
+        <th scope="col">Cédula</th>
+        <th scope="col">Correo Electronico</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for historiaclinica in hc %}
+        <th scope="row"></th>
+        <td>{{ historiaclinica.paciente.first_name| upper }} {{ historiaclinica.paciente.last_name| upper }}</td>
+        <td>{{historiaclinica.paciente.cedula }}</td>
+        <td>{{ historiaclinica.paciente.email }}</td>
+        <td><a class = "btn btn-outline-success"href="{% url 'Paciente_HC' historiaclinica.paciente_id  %}">VerHc</a></td>
+        <td><a class = "btn btn-outline-success"href="{% url 'Editar_HC' historiaclinica.paciente_id  %}">EditarHc</a></td>
+
+
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
 
 
 {% endblock content %}
