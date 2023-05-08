@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 from .models import Historiaclinica
 from .forms import *
 from django.contrib.auth import authenticate, login
-from django.views.generic import ListView, DetailView,View
+from django.views.generic import ListView, DetailView, View, TemplateView
 import os
 from django.conf import settings
 from django.http import HttpResponse
@@ -88,6 +88,7 @@ def register(request):
             user = authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
             login(request, user)
             messages.success(request, "Usuario Creado con Éxito")
+            return redirect('Home')
 
         else:
             messages.error(request, "Error al crear Usuario")
@@ -97,20 +98,35 @@ def register(request):
 
 def editar_usuario(request, pk):
     data = {
-        'form': CustomUserCreationForm()
+        'form': EditUser()
     }
     usuario = User.objects.get(id=pk)
     if request.method == 'POST':
-        user_creation_form = CustomUserCreationForm(data=request.POST, instance=usuario)
+        user_creation_formedit = EditUser(data=request.POST, instance=usuario)
 
-        if user_creation_form.is_valid():
-            user_creation_form.save()
+        if user_creation_formedit.is_valid():
+            user_creation_formedit.save()
             messages.success(request, "Usuario Editado con Éxito")
             return redirect('Home')
         else:
             messages.error(request, "Error al editar el usuario")
     return render(request, 'editar_usuario.html', data)
 
+def Cambiar_contraseña(request,pk):
+    data={
+        'form':ChangePassForm()
+    }
+    usuario = User.objects.get(id=pk)
+    if request.method == 'POST':
+        user_creation_form = ChangePassForm(data=request.POST, instance=usuario)
+
+        if user_creation_form.is_valid():
+            user_creation_form.save()
+            messages.success(request, "Contraseña Editada Con Éxito")
+            return redirect('Home')
+        else:
+            messages.error(request, "Error al Editar Contraseña")
+    return render(request, 'cambiarcontraseña.html', data)
 def Citas(request):
     return render(request, 'citas.html')
 
@@ -118,7 +134,7 @@ class PacientePdf(View):
     def get(self,request,*args,**kwargs):
         template = get_template('Pacientepdf.html')
         context ={
-            'phc':  Historiaclinica.objects.get(pk=self.kwargs['pk'])
+            'phc':  Historiaclinica.objects.get(pk=self.kwargs['pk']),
         }
         template.render()
         html = template.render(context)
@@ -127,3 +143,26 @@ class PacientePdf(View):
         pisa_status = pisa.CreatePDF(
             html, dest=response)
         return response
+
+
+def handler404(request, exception):
+    return render(request, 'error_404.html')
+
+
+
+def Reporte (request):
+    us = User.objects.all()
+    data = {
+        'us': us
+    }
+    return render(request, 'reporteusuarios.html', data)
+
+
+def ReporteHC (request):
+    hcp = Historiaclinica.objects.all()
+    data = {
+        'hcp': hcp
+    }
+    return render(request, 'reportehc.html', data)
+
+
