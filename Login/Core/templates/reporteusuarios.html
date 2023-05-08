@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Cantidad de Usuarios registrados: {{us.count}}</h1>
+
+
+<table id="datatable_pacientes" class="table mt-5" >
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">CÉDULA</th>
+        <th scope="col">NOMBRE COMPLETO</th>
+        <th scope="col">NOMBRE DE USUARIO</th>
+        <th scope="col">FECHA DE REGISTRO</th>
+        <th scope="col">ROL</th>
+        <th scope="col">ESTADO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for x in us %}
+        <td>{{x.id}}</td>
+        <td>{{ x.cedula }}</td>
+        <td>{{ x.first_name | upper }} {{ x.last_name | upper }}</td>
+        <td>{{ x.username}}</td>
+        <td>{{ x.date_joined}}</td>
+        {% if x.is_staff %}
+        <td>Administrador</td>
+        {% elif x.is_especialista %}
+        <td>Especialista</td>
+        {% else %}
+        <td>Paciente</td>
+        {% endif %}
+        {% if x.is_active%}
+        <td>Activo</td>
+        {% else %}
+        <td>Inactivo</td>
+        {% endif %}
+    </tbody>
+    {% endfor %}
+
+</table>
+
+{% endblock content %}

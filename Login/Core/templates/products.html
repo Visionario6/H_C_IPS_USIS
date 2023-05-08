@@ -3,7 +3,7 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<h3>HISTORIA CLINICA</h3>
+<h3>HISTORÍA CLINICA</h3>
 
 <div class="card">
 <div class="card-body">
@@ -12,8 +12,8 @@
         {% csrf_token %}
                 {{ form | crispy }}
         <br>
-        <button class="btn btn-outline-success float-end"type="submit">Actualizar</button>
-        <a href="{% url 'verHc' %}" class="card-link">Ver Historia Clínica</a>
+        <button class="btn btn-outline-success float-end"  title="Guardar Historia Clínica" type="submit"><i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
+        <a href="{% url 'verHc' %}" title="Historias Clínicas Registradas"class="btn btn-outline-success"><i class="fa-solid fa-eye"></i></a>
     </form>
     </div>
   </div>

@@ -6,24 +6,22 @@
 <table id="datatable_pacientes" class="table mt-5" >
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Paciente</th>
         <th scope="col">Cédula</th>
+        <th scope="col">Paciente</th>
         <th scope="col">Correo Electronico</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th scope="col">Ver</th>
+        <th scope="col">Editar</th>
 
       </tr>
     </thead>
     <tbody>
       <tr>
         {% for historiaclinica in hc %}
-        <th scope="row"></th>
-        <td>{{ historiaclinica.paciente.first_name| upper }} {{ historiaclinica.paciente.last_name| upper }}</td>
         <td>{{historiaclinica.paciente.cedula }}</td>
+        <td>{{ historiaclinica.paciente.first_name| upper }} {{ historiaclinica.paciente.last_name| upper }}</td>
         <td>{{ historiaclinica.paciente.email }}</td>
-        <td><a class = "btn btn-outline-success"href="{% url 'Paciente_HC' historiaclinica.paciente_id  %}">VerHc</a></td>
-        <td><a class = "btn btn-outline-success"href="{% url 'Editar_HC' historiaclinica.paciente_id  %}">EditarHc</a></td>
+        <td><a class = "btn btn-outline-success" title="Ver Historia Clínica" href="{% url 'Paciente_HC' historiaclinica.paciente_id  %}"><i class="fa-sharp fa-regular fa-eye"></i></a></td>
+        <td><a class = "btn btn-outline-success" title="Editar Historia Clínica"href="{% url 'Editar_HC' historiaclinica.paciente_id  %}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
 
 
       </tr>

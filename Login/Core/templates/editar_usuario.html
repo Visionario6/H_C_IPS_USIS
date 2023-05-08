@@ -9,9 +9,9 @@
         {% csrf_token %}
             {{ form | crispy }}
         <br>
-        <button class="btn btn-outline-success float-end"type="submit">Actualizar</button>
+        <button class="btn btn-outline-success float-end" title="Actualizar Datos" type="submit"><i class="fa-solid fa-floppy-disk"></i></button>
+        <a class="btn btn-outline-success" href="{% url 'Cambiar_Contraseña' user.id   %}" title="Editar Contraseña"><i class="fa-sharp fa-solid fa-lock"></i></a>
     </form>
 
 </div>
-
 {% endblock content %}
