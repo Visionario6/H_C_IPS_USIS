@@ -24,7 +24,6 @@ SECRET_KEY = 'django-insecure-@^p_(+6ke9xn@e)$ja!*!f#k@iii^jqn&h$m$k-ywhiuxlmv)q
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -42,8 +41,15 @@ INSTALLED_APPS = [
     'bootstrap5',
     'Core',
     'Users',
-    'xhtml2pdf' #pip install xhtml2pdf
+    'xhtml2pdf', #pip install xhtml2pdf
+    'dbbackup',  # django-dbbackup
+    "django_apscheduler",
 ]
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR/ 'backup'}
+
+
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
@@ -116,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Bogota'
 
 USE_I18N = True
 
@@ -150,4 +156,8 @@ EMAIL_USE_TLS = True
 LOGIN_REDIRECT_URL = 'Home'
 LOGOUT_REDIRECT_URL = 'Home'
 
+MEDIA_URL= '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 AUTH_USER_MODEL = 'Users.User'
+
