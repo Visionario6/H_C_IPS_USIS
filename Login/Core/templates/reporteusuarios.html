@@ -4,19 +4,19 @@
 
 <h1>Cantidad de Usuarios registrados: {{us.count}}</h1>
 
-
 <table id="datatable_pacientes" class="table mt-5" >
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">CÉDULA</th>
-        <th scope="col">NOMBRE COMPLETO</th>
-        <th scope="col">NOMBRE DE USUARIO</th>
-        <th scope="col">FECHA DE REGISTRO</th>
-        <th scope="col">ROL</th>
-        <th scope="col">ESTADO</th>
-      </tr>
-    </thead>
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">CÉDULA</th>
+      <th scope="col">NOMBRE COMPLETO</th>
+      <th scope="col">NOMBRE DE USUARIO</th>
+      <th scope="col">FECHA DE REGISTRO</th>
+      <th scope="col">ROL</th>
+      <th scope="col">ESTADO</th>
+      <th scope="col">EDITAR ROL</th>
+    </tr>
+  </thead>
     <tbody>
       <tr>
         {% for x in us %}
@@ -37,9 +37,12 @@
         {% else %}
         <td>Inactivo</td>
         {% endif %}
+        <td><a type="button"  href="{%  url 'Editar_rol' x.id %}" title="Editar Rol Usuario" class="btn btn-outline-success"><i class="fa-solid fa-user-pen"></i></a></td>
+      </tr>
+      {% endfor %}
     </tbody>
-    {% endfor %}
-
 </table>
 
+
 {% endblock content %}
+

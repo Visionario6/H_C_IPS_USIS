@@ -13,7 +13,10 @@ from xhtml2pdf import pisa
 from django.contrib import messages
 # Create your views here.
 def Home(request):
-    return render(request, 'home.html')
+    data ={
+        'title':'INICIO'
+    }
+    return render(request, 'home.html',data)
 
 
 @login_required
@@ -21,6 +24,7 @@ def Products(request):
 
     data = {
         'form': historiaclinicaForm(),
+        'title' : 'Historia Clínica'
     }
     if request.method == 'POST':
         historia_clinica_form = historiaclinicaForm(data=request.POST)
@@ -36,13 +40,15 @@ def VerHC (request):
     hc = Historiaclinica.objects.all()
     data = {
         'hc': hc,
+        'title' : 'Historia Clínica'
     }
     return render(request, 'VerHC.html', data)
 
 def PacienteHC (request, pk):
     Phc = get_object_or_404(Historiaclinica, paciente_id=pk)
     data = {
-        'phc': Phc
+        'phc': Phc,
+        'title' : 'Mi Historia Clínica'
     }
     return render(request, 'VerHCPaciente.html', data)
 
@@ -56,7 +62,8 @@ def MineHC (request, pk):
 def editarHc (request, pk):
 
     data = {
-        'form': historiaclinicaFormEdit()
+        'form': historiaclinicaFormEdit(),
+        'title' : 'Editar Historia Clínica'
     }
     editarhc = Historiaclinica.objects.get(paciente_id=pk)
     if request.method == 'POST':
@@ -76,7 +83,8 @@ def Exit(request):
 
 def register(request):
     data = {
-        'form': CustomUserCreationForm()
+        'form': CustomUserCreationForm(),
+        'title' : 'REGISTRARSE'
     }
 
     if request.method == 'POST':
@@ -98,7 +106,8 @@ def register(request):
 
 def editar_usuario(request, pk):
     data = {
-        'form': EditUser()
+        'form': EditUser(),
+        'title' : 'Editar Usuario'
     }
     usuario = User.objects.get(id=pk)
     if request.method == 'POST':
@@ -114,7 +123,8 @@ def editar_usuario(request, pk):
 
 def Cambiar_contraseña(request,pk):
     data={
-        'form':ChangePassForm()
+        'form':ChangePassForm(),
+        'title' : 'Editar Usuario'
     }
     usuario = User.objects.get(id=pk)
     if request.method == 'POST':
@@ -128,7 +138,10 @@ def Cambiar_contraseña(request,pk):
             messages.error(request, "Error al Editar Contraseña")
     return render(request, 'cambiarcontraseña.html', data)
 def Citas(request):
-    return render(request, 'citas.html')
+    data={
+        'title' : 'CITAS'
+    }
+    return render(request, 'citas.html', data)
 
 class PacientePdf(View):
     def get(self,request,*args,**kwargs):
@@ -148,12 +161,11 @@ class PacientePdf(View):
 def handler404(request, exception):
     return render(request, 'error_404.html')
 
-
-
 def Reporte (request):
     us = User.objects.all()
     data = {
-        'us': us
+        'us': us,
+        'title' : 'Reporte Usuarios'
     }
     return render(request, 'reporteusuarios.html', data)
 
@@ -161,8 +173,26 @@ def Reporte (request):
 def ReporteHC (request):
     hcp = Historiaclinica.objects.all()
     data = {
-        'hcp': hcp
+        'hcp': hcp,
+        'title' : 'Reporte Historias'
     }
     return render(request, 'reportehc.html', data)
 
 
+def editarRol (request, pk):
+
+    data = {
+        'form': EditRol(),
+        'title' : 'Editar Rol Usuarios'
+    }
+    editarrol = User.objects.get(id=pk)
+    if request.method == 'POST':
+        formeditrol = EditRol(data=request.POST, instance=editarrol)
+        if formeditrol.is_valid():
+            formeditrol.save()
+            messages.success(request, "Rol editado con exito")
+            return redirect('reporte')
+        else:
+            messages.error(request, "Error al editar Rol")
+
+    return render(request, 'editarrol.html', data)

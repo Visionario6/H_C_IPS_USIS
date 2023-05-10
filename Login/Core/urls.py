@@ -14,5 +14,6 @@ urlpatterns = [
     path('VerHistoriaClinicaPaciente/<int:pk>/', MineHC, name='Minehc'),
     path('pacientepdf/<int:pk>/', PacientePdf.as_view(), name='Pacientepdf'),
     path('reporte/', Reporte, name='reporte'),
-    path('reportehc/', ReporteHC, name='reportehc')
+    path('reportehc/', ReporteHC, name='reportehc'),
+    path('editarRolUsuario/<int:pk>/', editarRol, name='Editar_rol'),
 ]

@@ -29,3 +29,9 @@ class historiaclinicaFormEdit(forms.ModelForm):
         model = Historiaclinica
         fields = ['antecedentes', 'epicrisis', 'diagnostico', 'tratamientos', 'recomendaciones']
 
+
+
+class  EditRol(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['is_staff', 'is_especialista', 'is_active']

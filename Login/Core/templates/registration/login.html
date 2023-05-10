@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
-
 {% block content %}
 {% load crispy_forms_tags %}
-
 
 <div class="container mt-5 ms-5 ">
 
@@ -12,9 +10,9 @@
             <div class="card-body">
                 <h5 class="card-title">Inicia Sesion</h5>
                 {{ form | crispy }}
-                <a href="{% url 'Register' %}" class="card-link">Registrate</a>
-                <button class="btn btn-outline-success float-end"type="submit">Ingresar</button>
-                <a href="{% url 'pass_reset' %}" class="card-link">Olvidé mi contraseña</a>
+                <a href="{% url 'Register' %}" class="card-link">Registrate aquí</a>
+                <button class="btn btn-outline-success float-end" title="Ingresar" type="submit">Ingresar</button>
+                <a href="{% url 'password_reset' %}" class="card-link">¿Olvido su contraseña?</a>
             </div>
         </div>
     </form>
