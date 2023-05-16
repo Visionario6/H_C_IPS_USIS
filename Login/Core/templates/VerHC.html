@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h3> Historias Clínicas Registradas</h3>
+
+
+<table id="datatable_pacientes" class="table mt-5" >
+    <thead>
+      <tr>
+        <th scope="col">Cédula</th>
+        <th scope="col">Paciente</th>
+        <th scope="col">Correo Electrónico</th>
+        <th scope="col">Ver</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Descargar</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for historiaclinica in hc %}
+        <td>{{historiaclinica.paciente.cedula }}</td>
+        <td>{{ historiaclinica.paciente.first_name| upper }} {{ historiaclinica.paciente.last_name| upper }}</td>
+        <td>{{ historiaclinica.paciente.email }}</td>
+        <td><a class = "btn btn-outline-success" title="Ver Historia Clínica" href="{% url 'Paciente_HC' historiaclinica.paciente_id  %}"><i class="fa-sharp fa-regular fa-eye"></i></a></td>
+        <td><a class = "btn btn-outline-success" title="Editar Historia Clínica"href="{% url 'Editar_HC' historiaclinica.paciente_id  %}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+        <td><a class = "btn btn-outline-success" title="Descargar Historia Clínica"href="{% url 'Pacientepdf' historiaclinica.paciente_id  %}"><i class="fa-solid fa-download"></i></a></td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock content %}

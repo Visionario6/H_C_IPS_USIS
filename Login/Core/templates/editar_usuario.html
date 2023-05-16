@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<h3> Editar Usuario</h3>
+<div class="container m-5 p-5 ">
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy }}
+        <br>
+        <button class="btn btn-outline-success float-end" title="Actualizar Datos" type="submit"><i class="fa-solid fa-floppy-disk"></i></button>
+        <a class="btn btn-outline-success" href="{% url 'Cambiar_Contraseña' user.id   %}" title="Editar Contraseña"><i class="fa-sharp fa-solid fa-lock"></i></a>
+    </form>
+
+</div>
+{% endblock content %}

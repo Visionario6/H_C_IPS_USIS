@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<h3>HISTORIA CLÍNICA</h3>
+
+<div class="card">
+<div class="card-body">
+    <div class="row">
+    <form action="" method="post">
+        {% csrf_token %}
+                {{ form | crispy }}
+        <br>
+        <button class="btn btn-outline-success float-end"  title="Guardar Historia Clínica" type="submit"><i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
+        <a href="{% url 'verHc' %}" title="Historias Clínicas Registradas"class="btn btn-outline-success"><i class="fa-solid fa-eye"></i></a>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+{% endblock content %}
+
+

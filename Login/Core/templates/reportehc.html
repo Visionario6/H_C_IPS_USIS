@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Cantidad de Historias Clínicas Registradas: {{hcp.count}}</h1>
+
+<table id="datatable_pacientes" class="table mt-5" >
+    <thead>
+      <tr>
+        <th scope="col">CÉDULA</th>
+        <th scope="col">PACIENTE</th>
+        <th scope="col">NOMBRE COMPLETO</th>
+        <th scope="col">FECHA DE REGISTRO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for x in hcp %}
+        <td>{{ x.paciente.cedula }}</td>
+        <td>{{ x.paciente.username }}</td>
+        <td>{{ x.paciente.first_name | upper }} {{ x.paciente.last_name | upper }}</td>
+        <td>{{ x.Fecha_Registro}}
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock content %}

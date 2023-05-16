@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<div class="container mt-5 ms-5 ">
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="card mx-auto" style="width: 30rem;">
+            <div class="card-body">
+                <h5 class="card-title">Formulario Registro IPS USIS</h5>
+                {{ form | crispy }}
+                <p class="font-weight-bold " style="font-size:15px;">*RECUERDE QUE AL OPRIMIR  "REGISTRARSE" USTED ESTÁ ACEPTANDO  LAS <a href="http://www.ipsusis.com/tratamiento-de-datos/" target="_blank"  >POLÍTICAS DE DATOS</a> DE LA CLÍNICA IPS USIS *</p>
+                <button class="btn btn-outline-success float-end" title="Registrarse"type="submit">Registrarse</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+{% endblock content %}
